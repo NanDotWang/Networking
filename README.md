@@ -20,19 +20,15 @@ Using JohnSundell's Unbox https://github.com/JohnSundell/Unbox for JSON -> Objec
 ```
 ProfileRequest(name: "onevcat").send() { (result) in
 
-switch result {
+    switch result {
 
-case .empty:
-print("empty")
+        case .empty: print("empty")
 
-case .error(let error):
-print("error: \(error)")
+        case .error(let error): print("error: \(error)")
 
-case .success(let profile as Profile):
-print("success: \(profile)")
+        case .success(let profile as Profile): print("success: \(profile)")
 
-default:
-print("empty")
-}
+        default: print("empty")
+    }
 }
 ```
