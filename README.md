@@ -18,6 +18,15 @@ Using JohnSundell's Unbox https://github.com/JohnSundell/Unbox for JSON -> Objec
 ```
 
 ## How to use
+```
+- Try it out in Networking.playground 
+or 
+- Add the dynamic framework to your project
+or 
+- Drag all the .swift files into your project
+```
+
+## Example
 ```swift
 ProfileRequest(name: "onevcat").send() { (result) in
     switch result {
