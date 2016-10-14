@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B606B8552526EBC2F49FCA4323EC7B31E24D9DC7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "569157D5D29FECDF1202748411CC2DD6D55EA850" : 9223372036854775807,
+    "B606B8552526EBC2F49FCA4323EC7B31E24D9DC7" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3C3F59F0-8A40-493A-BBA8-97E63A0B92AF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "569157D5D29FECDF1202748411CC2DD6D55EA850" : "",
+    "B606B8552526EBC2F49FCA4323EC7B31E24D9DC7" : "Networking\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Networking",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Networking\/Networking.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/gitlab.com\/benxavior\/swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "569157D5D29FECDF1202748411CC2DD6D55EA850"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/benxavior\/Networking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B606B8552526EBC2F49FCA4323EC7B31E24D9DC7"
+    }
+  ]
+}

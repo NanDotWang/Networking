@@ -13,6 +13,8 @@ Using JohnSundell's Unbox https://github.com/JohnSundell/Unbox for JSON -> Objec
 - Decentralized requests
 
 - Result enum
+
+- Dynamic framework
 ```
 
 ## How to use
