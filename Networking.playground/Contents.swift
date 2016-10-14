@@ -6,19 +6,14 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 /// Instantiate the ProfileRequest and call the send function
 ProfileRequest(name: "onevcat").send() { (result) in
-
     switch result {
-
     case .empty:
-        print("empty")
-
+        print("show empty state")
     case .error(let error):
-        print("error: \(error)")
-
+        print("show error state with: \(error)")
     case .success(let profile as Profile):
-        print("success: \(profile)")
-
+        print("show success: \(profile)")
     default:
-        print("empty")
+        print("show empty state")
     }
 }

@@ -1,4 +1,3 @@
-
 ## Simple protocol oriented networking layer with URLSession.   
 
 Inspired by onevcat's https://github.com/MDCC2016/ProtocolNetwork.  
@@ -20,10 +19,14 @@ Using JohnSundell's Unbox https://github.com/JohnSundell/Unbox for JSON -> Objec
 ```swift
 ProfileRequest(name: "onevcat").send() { (result) in
     switch result {
-        case .empty: print("show empty state")
-        case .error(let error): print("show error state with: \(error)")
-        case .success(let profile as Profile): print("show success state: \(profile)")
-        default: print("show empty state")
+    case .empty:
+        print("show empty state")
+    case .error(let error):
+        print("show error state with: \(error)")
+    case .success(let profile as Profile):
+        print("show success: \(profile)")
+    default:
+        print("show empty state")
     }
 }
 ```
