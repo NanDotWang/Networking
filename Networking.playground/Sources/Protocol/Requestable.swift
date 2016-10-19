@@ -41,7 +41,7 @@ public enum Result {
 
 
 /// Request protocol that defines what a request object should have
-public protocol Request {
+public protocol Requestable {
     var path: String { get }
     var method: HTTPMethod { get }
     var parameters: AnyDict { get }
@@ -55,7 +55,7 @@ public protocol Request {
 }
 
 // MARK: - Defualt Implementations
-public extension Request {
+public extension Requestable {
 
     /// Default parameters
     var parameters: AnyDict {
@@ -79,7 +79,7 @@ public extension Request {
             urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         }
         let session = URLSession.shared
-        let task = session.dataTask(with: urlRequest as URLRequest, completionHandler: { data, response, error in
+        session.dataTask(with: urlRequest as URLRequest, completionHandler: { data, response, error in
 
             if let error = error {
                 DispatchQueue.main.async{ completion?(.error(error)) }
@@ -95,7 +95,6 @@ public extension Request {
             }
 
             DispatchQueue.main.async{ completion?(.success(result)) }
-        })
-        task.resume()
+        }).resume()
     }
 }

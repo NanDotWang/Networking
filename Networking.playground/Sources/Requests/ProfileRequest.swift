@@ -1,6 +1,6 @@
 
 /// Profile Request struct that represents a network request
-public struct ProfileRequest: Request {
+public struct ProfileRequest: Requestable {
 
     private let name: String
 
