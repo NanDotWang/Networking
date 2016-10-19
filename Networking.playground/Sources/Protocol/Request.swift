@@ -71,7 +71,7 @@ public extension Request {
     ///
     /// - parameter completion: completion handler that returns a Result enum
     func send(completion: ((Result) -> Void)? = nil) {
-        let url = Host.url.appendingPathComponent(path)
+        guard let url = URL(string: path, relativeTo: Host.url) else { return }
         let urlRequest = NSMutableURLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
         urlRequest.allHTTPHeaderFields = headers
         urlRequest.httpMethod = method.rawValue
@@ -86,9 +86,12 @@ public extension Request {
                 return
             }
 
-            guard let data = data, let result: Response = try? Unbox(data: data) else {
-                DispatchQueue.main.async{ completion?(.empty) }
-                return
+            guard
+                let data = data,
+                let result: Response = try? Unbox(data: data)
+                else {
+                    DispatchQueue.main.async{ completion?(.empty) }
+                    return
             }
 
             DispatchQueue.main.async{ completion?(.success(result)) }
