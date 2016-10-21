@@ -34,8 +34,8 @@ public enum HTTPMethod: String {
 /// - error:   pass Error upon failure
 /// - empty:   empty network response
 public enum Result {
-    case success(Unboxable)
-    case error(Error)
+    case success(Unboxable?)
+    case error(Error?)
     case empty
 }
 
@@ -52,6 +52,9 @@ public protocol Requestable {
 
     /// Send request function
     func send(completion: ((Result) -> Void)?)
+
+    /// a func that returns an AsyncBlockOperation
+    func asyncOperation(completion: ((Result) -> Void)?) -> AsyncBlockOperation
 }
 
 // MARK: - Defualt Implementations
@@ -65,6 +68,17 @@ public extension Requestable {
     /// Default headers
     var headers: StringDict {
         return ["Content-Type": "application/json"]
+    }
+
+    /// Default operation
+    func asyncOperation(completion: ((Result) -> Void)? = nil) -> AsyncBlockOperation {
+        return AsyncBlockOperation { (finish) in
+            self.send(completion: { (result) in
+                print("asyncOperation done.")
+                completion?(result)
+                finish()
+            })
+        }
     }
 
     /// Use URLSession to send a request
