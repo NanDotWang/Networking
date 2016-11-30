@@ -1,14 +1,11 @@
 
 /// Profile model
-public struct Profile {
-    let name: String?
-    let message: String?
+public struct Profile: Equatable {
+    let name: String
+    let message: String
 }
 
-// MARK: - Using Unbox to parse JSON into Object
-extension Profile: Unboxable {
-    public init(unboxer: Unboxer) {
-        name = unboxer.unbox(key: "name")
-        message = unboxer.unbox(key: "message")
-    }
+// Provide an Equatable implementation
+public func ==(lhs: Profile, rhs: Profile) -> Bool {
+    return lhs.name == rhs.name && lhs.message == rhs.message
 }

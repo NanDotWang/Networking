@@ -1,27 +1,26 @@
-
+//
+//  Requestable.swift
+//  Networking
+//
+//  Created by Nan Wang on 2016-10-31.
+//  Copyright © 2016 nan. All rights reserved.
+//
 import Foundation
 
-/// typealias [String : Any]
-public typealias AnyDict = [String: Any]
+/// typealias for [String : Any]
+public typealias JSON = [String: Any]
 
-/// typealias [String : String]
-public typealias StringDict = [String: String]
-
-/// Provide Host url
+/// Providing Host url
 public struct Host {
     static let url: URL = {
         let urlComponents = NSURLComponents()
         urlComponents.scheme = "https"
-        urlComponents.host = "api.onevcat.com"
+        urlComponents.host = "api.myjson.com"
         return urlComponents.url!
     }()
 }
 
 /// HTTP Methods
-///
-/// - get:  get method
-/// - post: post method
-/// - put:  put methd
 public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
@@ -30,55 +29,40 @@ public enum HTTPMethod: String {
 
 /// Result enum that holds the network request result
 ///
-/// - success: pass unboxed object upon success
+/// - success: pass parsed object upon success
 /// - error:   pass Error upon failure
 /// - empty:   empty network response
 public enum Result {
-    case success(Unboxable?)
-    case error(Error?)
+    case success(Parsable)
+    case failure(Error)
     case empty
 }
-
 
 /// Request protocol that defines what a request object should have
 public protocol Requestable {
     var path: String { get }
     var method: HTTPMethod { get }
-    var parameters: AnyDict { get }
-    var headers: StringDict { get }
+    var parameters: JSON { get }
+    var headers: [String: String] { get }
 
     /// Response that associated with different request
-    associatedtype Response: Unboxable
+    associatedtype Response: Parsable
 
     /// Send request function
     func send(completion: ((Result) -> Void)?)
-
-    /// a func that returns an AsyncBlockOperation
-    func asyncOperation(completion: ((Result) -> Void)?) -> AsyncBlockOperation
 }
 
 // MARK: - Defualt Implementations
 public extension Requestable {
 
     /// Default parameters
-    var parameters: AnyDict {
-        return AnyDict()
+    var parameters: JSON {
+        return JSON()
     }
 
     /// Default headers
-    var headers: StringDict {
+    var headers: [String: String] {
         return ["Content-Type": "application/json"]
-    }
-
-    /// Default operation
-    func asyncOperation(completion: ((Result) -> Void)? = nil) -> AsyncBlockOperation {
-        return AsyncBlockOperation { (finish) in
-            self.send(completion: { (result) in
-                print("asyncOperation done.")
-                completion?(result)
-                finish()
-            })
-        }
     }
 
     /// Use URLSession to send a request
@@ -96,19 +80,20 @@ public extension Requestable {
         session.dataTask(with: urlRequest as URLRequest, completionHandler: { data, response, error in
 
             if let error = error {
-                DispatchQueue.main.async{ completion?(.error(error)) }
+                DispatchQueue.main.async{ completion?(.failure(error)) }
                 return
             }
 
             guard
                 let data = data,
-                let result: Response = try? Unbox(data: data)
+                let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? JSON,
+                let parsedObject = try? Response(json)
                 else {
                     DispatchQueue.main.async{ completion?(.empty) }
                     return
             }
 
-            DispatchQueue.main.async{ completion?(.success(result)) }
+            DispatchQueue.main.async{ completion?(.success(parsedObject)) }
         }).resume()
     }
 }

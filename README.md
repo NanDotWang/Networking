@@ -2,17 +2,19 @@
 
 Inspired by onevcat's https://github.com/MDCC2016/ProtocolNetwork.  
 
-Using JohnSundell's Unbox https://github.com/JohnSundell/Unbox for JSON -> Object Mapping
-
 ## Highlights
 ```
+- No 3rd party dependency
+
+- Super lightweight networking
+
 - Protocol oriented
 
 - Swift 3 updated 
 
 - Decentralized requests
 
-- Result enum
+- Enum Result
 ```
 
 ## How to use
@@ -22,14 +24,14 @@ Using JohnSundell's Unbox https://github.com/JohnSundell/Unbox for JSON -> Objec
 
 ## Example
 ```swift
-ProfileRequest(name: "onevcat").send() { (result) in
+ProfileRequest().send() { (result) in
     switch result {
-    case .empty:
-        print("show empty state")
-    case let .error(error):
-        print("show error state with: \(error)")
     case let .success(profile):
-        print("show success: \(profile)")
+        print("Success: \(profile)")
+    case let .failure(error):
+        print("Failure: \(error)")
+    case .empty:
+        print("Empty")
     }
 }
 ```
