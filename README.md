@@ -1,8 +1,4 @@
 ## Simple protocol oriented networking layer with URLSession.   
-
-Inspired by onevcat's https://github.com/MDCC2016/ProtocolNetwork.  
-
-## Highlights
 ```
 - No 3rd party dependency
 
@@ -34,4 +30,6 @@ ProfileRequest().send() { (result) in
         print("Empty")
     }
 }
+
+Inspired by onevcat's https://github.com/MDCC2016/ProtocolNetwork.  
 ```
