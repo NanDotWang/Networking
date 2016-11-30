@@ -30,6 +30,5 @@ ProfileRequest().send() { (result) in
         print("Empty")
     }
 }
-
-Inspired by onevcat's https://github.com/MDCC2016/ProtocolNetwork.  
 ```
+Inspired by onevcat's talk https://github.com/MDCC2016/ProtocolNetwork.  
